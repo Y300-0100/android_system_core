@@ -93,9 +93,11 @@ struct {
     { "service.adb.tcp.port", AID_SHELL,    0 },
     { "persist.logd.size",AID_SYSTEM,   0 },
     { "persist.sys.",     AID_SYSTEM,   0 },
+    { "persist.msms.",    AID_RADIO,   0 },//SPRD: add for dsds
     { "persist.service.", AID_SYSTEM,   0 },
     { "persist.security.", AID_SYSTEM,   0 },
     { "persist.gps.",      AID_GPS,      0 },
+    { "media.", AID_MEDIA,   0 },
     { "persist.service.bdroid.", AID_BLUETOOTH,   0 },
     { "selinux."         , AID_SYSTEM,   0 },
     { "wc_transport.",     AID_BLUETOOTH,   AID_SYSTEM },

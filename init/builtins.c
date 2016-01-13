@@ -48,6 +48,8 @@
 #include "log.h"
 
 #include <private/android_filesystem_config.h>
+#include <sys/ioctl.h>
+#include "ubi-user.h"
 
 #if BOOTCHART
 #include "bootchart.h"
@@ -421,6 +423,34 @@ int do_mkdir(int nargs, char **args)
     return 0;
 }
 
+#define UBI_CTRL_DEV "/dev/ubi_ctrl"
+int do_ubiAttach(int nargs, char **args)
+{
+    struct ubi_attach_req req;
+    int fd;
+    int ret;
+
+    ERROR("do_ubiAttach %s %s\n",args[1],args[2]);
+
+    memset(&req, 0, sizeof(struct ubi_attach_req));
+    req.ubi_num =(typeof(req.ubi_num))atoi(args[1]);
+    if(-1 == req.ubi_num){
+        req.ubi_num = UBI_DEV_NUM_AUTO;
+    }
+    req.mtd_num = (typeof(req.mtd_num))mtd_name_to_number( args[2]);
+
+    fd = open(UBI_CTRL_DEV, O_RDONLY);
+    if(-1 == fd){
+        return -1;
+    }
+    ret = ioctl(fd, UBI_IOCATT, &req);
+    close(fd);
+    if(-1 == ret){
+        return -1;
+    }
+    return 0;
+}
+
 static struct {
     const char *name;
     unsigned flag;
@@ -560,7 +590,6 @@ static int wipe_data_via_recovery()
     android_reboot(ANDROID_RB_RESTART2, 0, "recovery");
     while (1) { pause(); }  // never reached
 }
-
 
 /*
  * This function might request a reboot, in which case it will
@@ -1033,3 +1062,11 @@ int do_umount(int nargs, char **args) {
     return umount(args[1]);
 }
 
+int do_pipe(int nargs, char **args) {
+    mode_t mode = get_mode(args[1]);
+    if (mkfifo(args[2], mode) < 0) {
+	ERROR("peter do pipe error haha\n");
+        return -errno;
+    }
+    return 0;
+}

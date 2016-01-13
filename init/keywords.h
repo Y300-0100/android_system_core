@@ -14,6 +14,7 @@ int do_hostname(int nargs, char **args);
 int do_ifup(int nargs, char **args);
 int do_insmod(int nargs, char **args);
 int do_mkdir(int nargs, char **args);
+int do_ubiAttach(int nargs, char **args);
 int do_mount_all(int nargs, char **args);
 int do_mount(int nargs, char **args);
 int do_powerctl(int nargs, char **args);
@@ -42,6 +43,7 @@ int do_log(int nargs, char **args);
 int do_loglevel(int nargs, char **args);
 int do_load_persist_props(int nargs, char **args);
 int do_load_all_props(int nargs, char **args);
+int do_pipe(int nargs, char **args);
 int do_wait(int nargs, char **args);
 int do_umount(int nargs, char **args);
 #define __MAKE_KEYWORD_ENUM__
@@ -71,6 +73,7 @@ enum {
     KEYWORD(import,      SECTION, 1, 0)
     KEYWORD(keycodes,    OPTION,  0, 0)
     KEYWORD(mkdir,       COMMAND, 1, do_mkdir)
+    KEYWORD(ubiattach,   COMMAND, 2, do_ubiAttach)
     KEYWORD(mount_all,   COMMAND, 1, do_mount_all)
     KEYWORD(mount,       COMMAND, 3, do_mount)
     KEYWORD(on,          SECTION, 0, 0)
@@ -109,6 +112,7 @@ enum {
     KEYWORD(loglevel,    COMMAND, 1, do_loglevel)
     KEYWORD(load_persist_props,    COMMAND, 0, do_load_persist_props)
     KEYWORD(load_all_props,        COMMAND, 0, do_load_all_props)
+    KEYWORD(pipe,        COMMAND, 2, do_pipe)
     KEYWORD(ioprio,      OPTION,  0, 0)
     KEYWORD(umount,		COMMAND, 1, do_umount)
 #ifdef __MAKE_KEYWORD_ENUM__
