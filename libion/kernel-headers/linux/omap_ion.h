@@ -16,23 +16,44 @@
  ***
  ****************************************************************************
  ****************************************************************************/
-#ifndef _UAPI_LINUX_ION_TEST_H
-#define _UAPI_LINUX_ION_TEST_H
-#include <linux/ioctl.h>
+#ifndef _LINUX_OMAP_ION_H
+#define _LINUX_OMAP_ION_H
 #include <linux/types.h>
+struct omap_ion_tiler_alloc_data {
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-struct ion_test_rw_data {
- __u64 ptr;
- __u64 offset;
- __u64 size;
+ size_t w;
+ size_t h;
+ int fmt;
+ unsigned int flags;
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
- int write;
- int __padding;
+ struct ion_handle *handle;
+ size_t stride;
+ size_t offset;
 };
-#define ION_IOC_MAGIC 'I'
 /* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
-#define ION_IOC_TEST_SET_FD   _IO(ION_IOC_MAGIC, 0xf0)
-#define ION_IOC_TEST_DMA_MAPPING   _IOW(ION_IOC_MAGIC, 0xf1, struct ion_test_rw_data)
-#define ION_IOC_TEST_KERNEL_MAPPING   _IOW(ION_IOC_MAGIC, 0xf2, struct ion_test_rw_data)
+enum {
+ OMAP_ION_HEAP_TYPE_TILER = ION_HEAP_TYPE_CUSTOM + 1,
+};
+#define OMAP_ION_HEAP_TILER_MASK (1 << OMAP_ION_HEAP_TYPE_TILER)
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+enum {
+ OMAP_ION_TILER_ALLOC,
+};
+enum {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ TILER_PIXEL_FMT_MIN = 0,
+ TILER_PIXEL_FMT_8BIT = 0,
+ TILER_PIXEL_FMT_16BIT = 1,
+ TILER_PIXEL_FMT_32BIT = 2,
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ TILER_PIXEL_FMT_PAGE = 3,
+ TILER_PIXEL_FMT_MAX = 3
+};
+enum {
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
+ OMAP_ION_HEAP_LARGE_SURFACES,
+ OMAP_ION_HEAP_TILER,
+ OMAP_ION_HEAP_SECURE_INPUT,
+};
+/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
 #endif
-/* WARNING: DO NOT EDIT, AUTO-GENERATED CODE - SEE TOP FOR INSTRUCTIONS */
