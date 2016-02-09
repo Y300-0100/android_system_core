@@ -68,6 +68,9 @@ typedef enum {
                                          * Plays over speaker only, silent on other devices.
                                          */
     AUDIO_STREAM_ACCESSIBILITY    = 10, /* For accessibility talk back prompts */
+#ifdef SPRD_HARDWARE
+    AUDIO_STREAM_FM               = 10,
+#endif
     AUDIO_STREAM_REROUTING        = 11, /* For dynamic policy output mixes */
     AUDIO_STREAM_PATCH            = 12, /* For internal audio flinger tracks. Fixed volume */
     AUDIO_STREAM_PUBLIC_CNT       = AUDIO_STREAM_TTS + 1,
@@ -150,6 +153,9 @@ typedef enum {
                                           /* An example of remote presentation is Wifi Display */
                                           /*  where a dongle attached to a TV can be used to   */
                                           /*  play the mix captured by this audio source.      */
+#ifdef SPRD_HARDWARE
+    AUDIO_SOURCE_RECORD_NO_AUDIO     = 9, /* SPRD: add one audioSource type for slow motion */
+#endif
 #ifdef QCOM_HARDWARE
     AUDIO_SOURCE_FM_RX               = 10,
     AUDIO_SOURCE_FM_RX_A2DP          = 11,
@@ -684,7 +690,7 @@ enum {
     AUDIO_DEVICE_OUT_FM_TX                     = 0x1000000,
     AUDIO_DEVICE_OUT_PROXY                     = 0x2000000,
 #endif
-#ifdef SPRD_HARDWARE
+#if defined(SPRD_HARDWARE)
     AUDIO_DEVICE_OUT_FM_HEADSET                = 0x1000000,
     AUDIO_DEVICE_OUT_FM_SPEAKER                = 0x2000000,
 #endif
@@ -716,7 +722,7 @@ enum {
                                  AUDIO_DEVICE_OUT_FM_TX |
                                  AUDIO_DEVICE_OUT_PROXY |
 #endif
-#ifdef SPRD_HARDWARE
+#if defined(SPRD_HARDWARE)
                                  AUDIO_DEVICE_OUT_FM_HEADSET |
                                  AUDIO_DEVICE_OUT_FM_SPEAKER |
 #endif
@@ -729,7 +735,7 @@ enum {
                                  AUDIO_DEVICE_OUT_BLUETOOTH_SCO_CARKIT),
     AUDIO_DEVICE_OUT_ALL_USB  = (AUDIO_DEVICE_OUT_USB_ACCESSORY |
                                  AUDIO_DEVICE_OUT_USB_DEVICE),
-#ifdef SPRD_HARDWARE
+#if defined(SPRD_HARDWARE)
     AUDIO_DEVICE_OUT_ALL_FM   = (AUDIO_DEVICE_OUT_FM_HEADSET |
                                  AUDIO_DEVICE_OUT_FM_SPEAKER),
 #endif
