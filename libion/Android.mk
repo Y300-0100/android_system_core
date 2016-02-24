@@ -5,6 +5,9 @@ LOCAL_C_INCLUDES += \
 	$(LOCAL_PATH)/include \
 	$(LOCAL_PATH)/kernel-headers \
 	$(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include
+LOCAL_EXPORT_C_INCLUDE_DIRS := \
+	$(LOCAL_PATH)/include \
+	$(LOCAL_PATH)/kernel-headers
 LOCAL_SRC_FILES := ion.c
 LOCAL_MODULE := libion
 LOCAL_MODULE_TAGS := optional
